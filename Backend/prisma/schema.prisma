@@ -18,8 +18,30 @@ model User {
   id          String   @id @default(uuid()) @map("_id") // maps to _id column
   username    String   @unique
   email       String   @unique
-  passwordHash String
+  password String
   createdAt   DateTime @default(now())
   lastLogin   DateTime?
+
+  
+  // ✅ One-to-one relationship
+  avatar       Avatar?
 }
 
+
+model Avatar {
+  id          Int       @id @default(autoincrement())
+  userId      String       @unique             // one avatar per user
+  class       String                     // Warrior, Mage, Rogue, etc.
+  level       Int       @default(1)
+  xp          Int       @default(0)
+  hp          Int       @default(100)
+  stats       Json?                       // { str, int, dex }
+  gear        String[]                    // ["Iron Sword", "Steel Shield"]
+  appearance  Json?                       // { hair, skin, armorColor }
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // ✅ Relation to User
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
