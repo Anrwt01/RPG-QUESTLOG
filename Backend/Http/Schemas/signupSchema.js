@@ -6,7 +6,7 @@ export const signupSchema = z.object({
         .string()
         .min(8, "Password must be at least 8 characters long")
         .max(64, "Password too long"),
-    name: z
+    username: z
         .string()
         .trim()
         .min(1, "Name cannot be empty")

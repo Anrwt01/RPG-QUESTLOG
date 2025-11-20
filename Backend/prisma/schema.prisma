@@ -15,7 +15,7 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(uuid()) @map("_id") // maps to _id column
+  id          String   @id @default(uuid()) @map("id") // maps to _id column
   username    String   @unique
   email       String   @unique
   password String
