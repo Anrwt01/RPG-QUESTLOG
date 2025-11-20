@@ -59,6 +59,8 @@ export const Postsignup = async (req, res) => {
       { expiresIn: '1h' }
     );
 
+   //   res.redirect("/avatar/create") has to done by front end
+
     // ✅ Return response
     return res.status(201).json({
       newUser,
