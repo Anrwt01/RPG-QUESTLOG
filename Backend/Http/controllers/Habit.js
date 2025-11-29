@@ -1,28 +1,21 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
+
+// const prisma = new PrismaClient();
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 
 const prisma = new PrismaClient();
+
 
 export const Habitcreate = async (req, res) => {
   try {
     const { habitName, habitType, targetValue, unitName } = req.body;
 
-    // 1. Get JWT from header
-    const authHeader = req.headers["authorization"];
-    if (!authHeader) {
-      return res.status(401).json({ error: "Authorization header missing" });
-    }
-
-    const token = authHeader.split(" ")[1];
-    if (!token) {
-      return res.status(401).json({ error: "Authorization token missing" });
-    }
-
-    // 2. Verify JWT
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const currUser = decoded.id;
+    
+    const currUser = req.userId;
 
     // 3. Check if user exists
     const user = await prisma.user.findUnique({
@@ -34,7 +27,7 @@ export const Habitcreate = async (req, res) => {
     }
 
     // 4. Create Habit
-    const newHabit = await prisma.habit.create({
+    const newHabit = await prisma.Habit.create({
       data: {
         userId: user.id,
         name: habitName,
@@ -49,7 +42,6 @@ export const Habitcreate = async (req, res) => {
       success: true,
       message: "Habit created successfully",
       habit: newHabit,
-      token,
     });
 
   } catch (error) {

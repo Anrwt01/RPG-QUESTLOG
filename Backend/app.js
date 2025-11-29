@@ -1,7 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import http from 'http';
-import AuthRoutes from "./Http/Routes/AuthRoutes.js";
+import authRoutes from "./Http/Routes/AuthRoutes.js";
+import avatarRoutes from "./Http/Routes/AuthRoutes.js";
+import habitRoutes from "./Http/Routes/Habit.js";
 const PORT = 5000
 const app = express();
 import cors from 'cors';
@@ -15,13 +17,13 @@ app.use(express.json());
 
 }));
 
+app.use("/api/auth", authRoutes);
+app.use("/api/avatar", avatarRoutes);
+app.use("/api/habit", habitRoutes);
 
-app.use("/api/auth", AuthRoutes)
-app.use("/api/avatar", AuthRoutes )
-app.use("/api/habit", AuthRoutes)
 
 const server = http.createServer(app);
 
 server.listen(5000, () => {
-  console.log("Server is running on PORT" , PORT);
+  console.log("http://localhost:"+PORT);
 });

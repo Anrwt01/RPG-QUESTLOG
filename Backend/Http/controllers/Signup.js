@@ -1,13 +1,17 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import { PrismaClient } from '@prisma/client';
+// import { PrismaClient } from "@prisma/client";
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { signupSchema } from '../Schemas/signupSchema.js';
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
+
+const prisma = new PrismaClient();
 
 dotenv.config();
 const app = express();
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 export const Postsignup = async (req, res) => {
   try {

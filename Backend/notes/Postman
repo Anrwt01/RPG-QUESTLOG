@@ -1,0 +1,71 @@
+AUTH ROUTES
+✅ Signup
+POST http://localhost:5000/api/auth/signup
+Content-Type: application/json
+
+{
+  "username": "anuj",
+  "email": "anuj@gmail.com",
+  "password": "123456"
+}
+
+✅ Signin
+POST http://localhost:5000/api/auth/signin
+Content-Type: application/json
+
+{
+  "email": "anuj@gmail.com",
+  "password": "123456"
+}
+
+🧍 AVATAR ROUTES
+
+(Require JWT token in headers)
+
+✅ Create Avatar
+POST http://localhost:5000/api/avatar/create
+Authorization: Bearer <your_token_here>
+Content-Type: application/json
+
+{
+  "avatarClass": "Warrior",
+  "gear": ["Iron Sword", "Wooden Shield"]
+}
+
+📆 HABIT ROUTES
+
+(Require JWT token in headers)
+
+✅ Create Habit
+POST http://localhost:5000/api/habit/create
+Authorization: Bearer <your_token_here>
+Content-Type: application/json
+
+{
+  "name": "Drink Water",
+  "type": "health",
+  "target": 8,
+  "unit": "glasses"
+}
+
+✅ Get All Habits
+GET http://localhost:5000/api/habit
+Authorization: Bearer <your_token_here>
+
+✅ Get One Habit
+GET http://localhost:5000/api/habit/1
+Authorization: Bearer <your_token_here>
+
+✅ Update Habit
+PATCH http://localhost:5000/api/habit/1
+Authorization: Bearer <your_token_here>
+Content-Type: application/json
+
+{
+  "name": "Drink More Water",
+  "target": 10
+}
+
+✅ Delete Habit
+DELETE http://localhost:5000/api/habit/1
+Authorization: Bearer <your_token_here>

@@ -1,29 +1,20 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
+
+// const prisma = new PrismaClient();
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 
 const prisma = new PrismaClient();
+
 
 export const Avatarcreate = async (req, res) => {
   try {
     const { avatarClass, gear } = req.body;
 
-    // 1. Get Authorization header
-    const authHeader = req.headers["authorization"];
-    if (!authHeader) {
-      return res.status(401).json({ error: "Authorization header missing" });
-    }
-
-    // 2. Extract token
-    const token = authHeader.split(" ")[1];
-    if (!token) {
-      return res.status(401).json({ error: "Token missing" });
-    }
-
-    // 3. Verify JWT
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decoded.id;
+    const userId = req.userId;
 
     // 4. Find user
     const user = await prisma.user.findUnique({

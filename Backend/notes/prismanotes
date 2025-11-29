@@ -1,0 +1,71 @@
+
+DATABASE_URL="postgresql://postgres:anuj4587@localhost:5432/mydb?schema=public"
+
+JWT_SECRET="hvcdbvhjdsbhjcdbshjvdbshjcbdsj"
+
+CORS_ORIGIN="http://loaclhost:5000"
+
+
+
+
+model User {
+  id          String   @id @default(uuid()) @map("id") // maps to _id column
+  username    String   @unique
+  email       String   @unique
+  password String
+  createdAt   DateTime @default(now())
+  lastLogin   DateTime?
+
+  
+  // ✅ One-to-one relationship
+  avatar       Avatar?
+
+  // Array for Storing Habit
+    habits   Habit[]   
+}
+
+
+model Avatar {
+  id          Int       @id @default(autoincrement())
+  userId      String       @unique             // one avatar per user
+  class       String                     // Warrior, Mage, Rogue, etc.
+  level       Int       @default(1)
+  xp          Int       @default(0)
+  hp          Int       @default(100)
+  // stats       Json?                       // { str, int, dex }
+  gear        String[]                    // ["Iron Sword", "Steel Shield"]
+  // appearance  Json?                       // { hair, skin, armorColor }
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // ✅ Relation to User
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+
+model Habit {
+  id             Int       @id @default(autoincrement())
+  userId         String
+  name           String
+  type           String           // health, productivity, learning, etc.
+  target         Int              // 8 glasses, 60 mins, etc.
+  unit           String           // times, mins, pages, etc.
+  streak         Int       @default(0)
+  lastCompleted  DateTime?        // nullable
+  totalCompleted Int       @default(0)
+
+  // Relation with User
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+
+generator client {
+  provider = "prisma-client-js"
+//   output   = "../generated/prisma"
+}
+
+import "dotenv/config";

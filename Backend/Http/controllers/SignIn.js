@@ -1,9 +1,14 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { signinSchema } from "../Schemas/signinSchema.js";
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
+
+// const prisma = new PrismaClient();
+import pkg from "@prisma/client";
+const { PrismaClient } = pkg;
 
 const prisma = new PrismaClient();
+
 
 export const Postsignin = async (req, res) => {
   const result = signinSchema.safeParse(req.body);
