@@ -30,45 +30,7 @@ At its heart, **QuestLog** transforms daily goals, learning progress, or project
 | Future Frontend | React (planned) |
 
 ---
-
-## 🧱 Database Models
-
-### 🧍‍♂️ User
-| Field | Type | Description |
-|-------|------|-------------|
-| id | String (UUID) | Primary key |
-| username | String | Unique |
-| email | String | Unique |
-| password | String | Hashed |
-| createdAt | DateTime | Auto timestamp |
-| lastLogin | DateTime? | Nullable |
-| avatar | Relation | One-to-one with Avatar |
-
-### 🛡️ Avatar
-| Field | Type | Description |
-|-------|------|-------------|
-| id | Int | Auto increment |
-| userId | String | Linked to User (unique) |
-| class | String | e.g. Warrior, Mage, Rogue |
-| level | Int | Default: 1 |
-| xp | Int | Default: 0 |
-| hp | Int | Default: 100 |
-| stats | JSON | `{ str, int, dex }` |
-| gear | String[] | Equipped items |
-| appearance | JSON | `{ hair, skin, armorColor }` |
-| createdAt | DateTime | Default now() |
-| updatedAt | DateTime | Auto updated |
-
----
-
-## 🔐 Authentication System
-- **Signup:** Validates data, hashes password, ensures unique email/username, and stores securely.
-- **Login:** Verifies credentials and returns a signed JWT for session management.
-- **Token Auth:** JWT stores essential user info (email, username) for quick access.
-
----
-
-## 🧭 Game Logic (Planned Features)
+## 🧭 Game Logic
 | Feature | Description |
 |----------|-------------|
 | **Quests** | Daily or long-term tasks that grant XP and rewards. |
