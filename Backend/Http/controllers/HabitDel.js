@@ -1,12 +1,12 @@
 // import { PrismaClient } from "@prisma/client";
 // const prisma = new PrismaClient();
+import dotenv from "dotenv";
+dotenv.config();
+
 import pkg from "@prisma/client";
 const { PrismaClient } = pkg;
 
 const prisma = new PrismaClient();
-
-import dotenv from "dotenv";
-dotenv.config();
 
 export const HabitDelete = async (req, res) => {
   try {

@@ -1,12 +1,10 @@
 import dotenv from "dotenv";
+dotenv.config();
 // import { PrismaClient } from "@prisma/client";
 import pkg from "@prisma/client";
 const { PrismaClient } = pkg;
 
 const prisma = new PrismaClient();
-
-
-dotenv.config();
 // const prisma = new PrismaClient();
 
 // ================= FIND HABIT BY ID =================
