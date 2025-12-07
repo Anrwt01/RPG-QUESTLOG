@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 
 export const Habitcreate = async (req, res) => {
   try {
-    const { habitName, habitType, targetValue, unitName } = req.body;
+    const { name, type, target, unit } = req.body;
 
     
     const currUser = req.userId;
@@ -30,10 +30,10 @@ export const Habitcreate = async (req, res) => {
     const newHabit = await prisma.Habit.create({
       data: {
         userId: user.id,
-        name: habitName,
-        type: habitType,
-        target: targetValue,
-        unit: unitName,
+        name: name,
+        type: type,
+        target: target,
+        unit: unit,
       },
     });
 

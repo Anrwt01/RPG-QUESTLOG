@@ -7,9 +7,9 @@ import { signupSchema } from '../Schemas/signupSchema.js';
 import pkg from "@prisma/client";
 const { PrismaClient } = pkg;
 
-const prisma = new PrismaClient();
-
 dotenv.config();
+
+const prisma = new PrismaClient();
 const app = express();
 // const prisma = new PrismaClient();
 

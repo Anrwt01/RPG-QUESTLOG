@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { Avatarcreate } from "../controllers/Avatar.js";
-import { verifyUser } from "../middlewares/auth.js";
+import { Avatarcreate } from "../Controllers/Avatar.js";
+import { verifyUser } from "../Middlewares/VerifyUser.js";
 
 const router = Router();
 

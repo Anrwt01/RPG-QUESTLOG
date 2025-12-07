@@ -1,24 +1,48 @@
 import dotenv from "dotenv";
+dotenv.config();
 // import { PrismaClient } from "@prisma/client";
 import pkg from "@prisma/client";
 const { PrismaClient } = pkg;
 
 const prisma = new PrismaClient();
-
-
-dotenv.config();
 // const prisma = new PrismaClient();
+
+// ================= GET ALL HABITS =================
+
+export const HabitGetAll = async (req, res) => {
+  const userId = req.userId; // get user id from middleware
+
+  try {
+    const habits = await prisma.habit.findMany({
+      where: {
+        userId: userId
+      }
+    });
+
+    return res.status(200).json({
+      success: true,
+      habits: habits,
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      success: false,
+      message: "Error fetching habits"
+    });
+  }
+};
 
 // ================= FIND HABIT BY ID =================
 
 export const HabitUpdateId = async (req, res) => {
-  const { habitid } = req.params;
-  const userId = req.user.id; // get actual user id
+  const { id } = req.params;
+  const userId = req.userId; // get user id from middleware
 
   try {
     const habit = await prisma.habit.findFirst({
       where: {
-        id: habitid,
+        id: id,
         userId: userId
       }
     });
@@ -29,7 +53,7 @@ export const HabitUpdateId = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      userHabit: habit,
+      habit: habit,
     });
 
   } catch (error) {
@@ -45,15 +69,15 @@ export const HabitUpdateId = async (req, res) => {
 // ================= UPDATE HABIT =================
 
 export const HabitUpd = async (req, res) => {
-  const { habitId } = req.params;
+  const { id } = req.params;
   const { name, type, target, unit, streak, totalCompleted } = req.body;
 
-  const userId = req.user.id;
+  const userId = req.userId;
 
   try {
     const updatedHabit = await prisma.habit.updateMany({
       where: {
-        id: habitId,
+        id: id,
         userId: userId,
       },
       data: {

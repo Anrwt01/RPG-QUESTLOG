@@ -50,7 +50,7 @@ Content-Type: application/json
 
 ✅ Get All Habits
 GET http://localhost:5000/api/habit
-Authorization: Bearer <your_token_here>
+Authorization: Bearer <your_token_here
 
 ✅ Get One Habit
 GET http://localhost:5000/api/habit/1

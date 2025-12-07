@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import http from 'http';
 import authRoutes from "./Http/Routes/AuthRoutes.js";
-import avatarRoutes from "./Http/Routes/AuthRoutes.js";
+import avatarRoutes from "./Http/Routes/AvatarRoute.js";
 import habitRoutes from "./Http/Routes/Habit.js";
 const PORT = 5000
 const app = express();
