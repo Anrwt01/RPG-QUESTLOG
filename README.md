@@ -121,9 +121,4 @@ Develop an API ready for future frontend integration
 This project is released under the MIT License.
 
 🏰 QuestLog — Level Up Your Journey!
-yaml
-Copy code
 
----
-
-Would you like me to **add a “Project Roadmap” section** (like *Phase 1: Authentication*, *Phase 2: 
